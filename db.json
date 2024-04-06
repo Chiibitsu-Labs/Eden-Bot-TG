@@ -1,0 +1,106 @@
+{
+  "globalRoles": [
+    {
+      "name": "owner",
+      "level": 10
+    },
+    {
+      "name": "admin",
+      "level": 5
+    },
+    {
+      "name": "leader",
+      "level": 4
+    },
+    {
+      "name": "advocate",
+      "level": 3
+    },
+    {
+      "name": "member",
+      "level": 2
+    },
+    {
+      "name": "user",
+      "level": 1
+    }
+  ],
+  "communities": {
+    "559098686": {
+      "users": [
+        {
+          "id": 559098686,
+          "username": "chiibitsu",
+          "points": 95,
+          "role": "owner"
+        }
+      ],
+      "transactions": [],
+      "roles": [],
+      "settings": {
+        "pointsName": "GOOD",
+        "welcomeMessage": "Welcome to Eden's Community Rewards Program! Made with <3 by Chiibitsu Labs. Type /start to get started.",
+        "welcomeEnabled": false
+      }
+    },
+    "-1002006262479": {
+      "users": [
+        {
+          "id": 911907262,
+          "username": "DocVince",
+          "points": 999991123,
+          "role": "member"
+        },
+        {
+          "id": 559098686,
+          "points": 10079,
+          "role": "owner",
+          "username": "chiibitsu"
+        },
+        {
+          "id": 2008390276,
+          "points": 497,
+          "role": "admin",
+          "username": "Xblanc25"
+        },
+        {
+          "id": 5103146862,
+          "points": 0,
+          "role": "user",
+          "username": "bitlukane"
+        }
+      ],
+      "transactions": [],
+      "roles": [
+        {
+          "name": "owner",
+          "level": 10
+        },
+        {
+          "name": "admin",
+          "level": 5
+        },
+        {
+          "name": "leader",
+          "level": 4
+        },
+        {
+          "name": "advocate",
+          "level": 3
+        },
+        {
+          "name": "member",
+          "level": 2
+        },
+        {
+          "name": "user",
+          "level": 1
+        }
+      ],
+      "settings": {
+        "pointsName": "Oro",
+        "welcomeMessage": "Welcome to Ophir Crypto's Community Rewards Program! Made with ❤️ by Chiibitsu Labs. Type /start to get started."
+      }
+    }
+  }
+}

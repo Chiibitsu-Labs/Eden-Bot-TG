@@ -1,0 +1,31 @@
+{
+  "users": [],
+  "transactions": [],
+  "roles": [
+    {
+      "name": "owner",
+      "level": 10
+    },
+    {
+      "name": "admin",
+      "level": 5
+    },
+    {
+      "name": "leader",
+      "level": 4
+    },
+    {
+      "name": "advocate",
+      "level": 3
+    },
+    {
+      "name": "member",
+      "level": 2
+    },
+    {
+      "name": "user",
+      "level": 1
+    }
+  ],
+  "usernames": []
+}
