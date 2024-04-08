@@ -31,7 +31,7 @@
         {
           "id": 559098686,
           "username": "chiibitsu",
-          "points": 95,
+          "points": 1095,
           "role": "owner"
         }
       ],
@@ -43,20 +43,22 @@
         "welcomeEnabled": false
       }
     },
-    "-1002006262479": {
+    "1620878669": {
       "users": [
         {
-          "id": 911907262,
-          "username": "DocVince",
-          "points": 999991123,
-          "role": "member"
-        },
-        {
-          "id": 559098686,
-          "points": 10079,
-          "role": "owner",
-          "username": "chiibitsu"
-        },
+          "id": 1620878669,
+          "username": "Ellen",
+          "points": 0,
+          "role": "user"
+        }
+      ],
+      "transactions": [],
+      "roles": [],
+      "settings": {},
+      "pointsName": "GOOD"
+    },
+    "-1002006262479": {
+      "users": [
         {
           "id": 2008390276,
           "points": 497,
@@ -64,8 +66,20 @@
           "username": "Xblanc25"
         },
         {
+          "id": 559098686,
+          "points": 100,
+          "role": "owner",
+          "username": "chiibitsu"
+        },
+        {
+          "id": 911907262,
+          "username": "DocVince",
+          "points": 100,
+          "role": "admin"
+        },
+        {
           "id": 5103146862,
-          "points": 0,
+          "points": 100,
           "role": "user",
           "username": "bitlukane"
         }
@@ -101,6 +115,28 @@
         "pointsName": "Oro",
         "welcomeMessage": "Welcome to Ophir Crypto's Community Rewards Program! Made with ❤️ by Chiibitsu Labs. Type /start to get started."
       }
+    },
+    "-1001881894889": {
+      "users": [
+        {
+          "id": 5103146862,
+          "username": "bitlukane",
+          "points": 100,
+          "role": "member"
+        },
+        {
+          "id": 559098686,
+          "username": "chiibitsu",
+          "points": 15,
+          "role": "owner"
+        }
+      ],
+      "transactions": [],
+      "roles": [],
+      "settings": {
+        "pointsName": "ORO"
+      },
+      "pointsName": "ORO"
     }
   }
 }
