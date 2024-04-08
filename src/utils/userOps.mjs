@@ -1,16 +1,32 @@
 // userOps.mjs
 
 // Function to adjust user points
-export const adjustUserPoints = async (username, pointsAdjustment, db, chatId) => {
+export const adjustUserPoints = async (username, pointsAdjustment, db, chatId, senderId, senderRole, note) => {
   const community = db.data.communities[chatId];
   if (!community) return { success: false, message: "Community not found." };
 
   const user = community.users.find(user => user.username === username);
   if (!user) return { success: false, message: "User not found." };
 
+
+  // Adjust points
   user.points += pointsAdjustment;
+
+  // Log the transaction
+  const transaction = {
+    txid: Date.now(), // Simple timestamp-based ID, consider a more robust ID system
+    datetime: new Date().toISOString(),
+    communityId: chatId,
+    senderId: senderId,
+    senderRole: senderRole,
+    recipientId: user.id,
+    amount: pointsAdjustment,
+    note: note
+  };
+  community.transactions.push(transaction);
+
   await db.write();
-  return { success: true, message: "Points adjusted successfully." };
+  return { success: true, message: "Points adjusted successfully.", transaction };
 };
 
 // Function to delete user from the database and their points
