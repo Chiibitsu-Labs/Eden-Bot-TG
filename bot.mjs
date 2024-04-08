@@ -1,4 +1,4 @@
-import { startWebServer } from './src/webServer.mjs';
+import { startWebServer } from './src/utils/webserver.mjs';
 import 'dotenv/config';
 import TelegramBot from 'node-telegram-bot-api';
 import { initDb } from './src/db/db.mjs';
