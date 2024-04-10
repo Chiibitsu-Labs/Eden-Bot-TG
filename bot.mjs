@@ -1,6 +1,7 @@
 import { startWebServer } from './src/utils/webserver.mjs';
-import { logTransactionToSheet } from './src/utils/googleSheetsClient.mjs';
 import 'dotenv/config';
+import { logTransactionToSheet } from './src/utils/googleSheetsClient.mjs';
+import { addUserToAirtable, checkUserExists, updateUserStatusInAirtable } from './src/utils/airtableHelpers.mjs'; // Updated import
 import TelegramBot from 'node-telegram-bot-api';
 import { initDb } from './src/db/db.mjs';
 import { startCommand } from './src/commands/start.mjs';
@@ -21,7 +22,7 @@ const token = process.env.TG_BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 
 (async () => {
-  startWebServer(); // Add this line to start the web server
+  startWebServer(); // Starts the web server
 
   const db = await initDb();
 
@@ -35,19 +36,39 @@ const bot = new TelegramBot(token, { polling: true });
   bot.onText(/\/top/, (msg) => topCommand(msg, bot, db));
   bot.onText(/\/role/, (msg) => roleCommand(msg, bot, db));
   bot.onText(/\/mydata/, (msg) => mydataCommand(msg, bot, db));
-  bot.onText(/\/delete (@\w+)/, (msg) => deleteUserCommand(msg, bot, db));
+  bot.onText(/\/deleteuser/, (msg) => deleteUserCommand(msg, bot, db));
   bot.onText(/\/setpointsname (.+)/, (msg) => setPointsNameCommand(msg, bot, db));
   bot.onText(/\/welcome$/, (msg) => welcomeCommand(msg, bot, db)); // For viewing and basic toggling of welcome messages
   bot.onText(/\/welcome\s+(.+)/, (msg) => welcomeCommand(msg, bot, db)); // Handles all welcome-related actions
   bot.onText(/\/setwelcome\s+(.+)/, (msg) => setWelcomeCommand(msg, bot, db)); // For setting custom welcome messages
 
-  // Welcome new members
-  bot.on('message', async (msg) => {
-    if (msg.new_chat_members && msg.new_chat_members.length > 0) {
-      const chatId = msg.chat.id.toString();
-      const welcomeMessage = db.data.communities[chatId]?.welcomeMessage || "Welcome to the community! Type /start to get started.";
-      bot.sendMessage(chatId, welcomeMessage);
-    }
+
+    // Welcome new members and add them to Airtable if they don't exist
+    bot.on('message', async (msg) => {
+      if (msg.new_chat_members && msg.new_chat_members.length > 0) {
+          const chatId = msg.chat.id.toString();
+          const welcomeMessage = db.data.communities[chatId]?.welcomeMessage || "Welcome to the community! Type /enroll to join the Community Rewards Program.";
+
+          for (const newMember of msg.new_chat_members) {
+              try {
+                  if (!(await checkUserExists(newMember.id))) {
+                      await addUserToAirtable({
+                          id: newMember.id,
+                          username: newMember.username || '',
+                          role: 'user', // Default role when new member joins
+                          chatId,
+                      });
+                      console.log(`Added new member ${newMember.username || newMember.id} to Airtable.`);
+                  } else {
+                      console.log(`Member ${newMember.username || newMember.id} already exists in Airtable.`);
+                  }
+              } catch (error) {
+                  console.error(`Error handling new member ${newMember.username || newMember.id}:`, error);
+              }
+          }
+
+          bot.sendMessage(chatId, welcomeMessage);
+      }
   });
 
 })();

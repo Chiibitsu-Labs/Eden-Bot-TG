@@ -31,174 +31,12 @@
         {
           "id": 559098686,
           "username": "chiibitsu",
-          "points": 1830,
-          "role": "owner"
+          "points": 3580,
+          "role": "owner",
+          "Status": "Active"
         }
       ],
-      "transactions": [
-        {
-          "txid": 1712569129778,
-          "datetime": "2024-04-08T09:38:49.778Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "recipientId": 559098686,
-          "amount": 100,
-          "note": "testing the new transaction"
-        },
-        {
-          "txid": 1712569145605,
-          "datetime": "2024-04-08T09:39:05.605Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "recipientId": 559098686,
-          "amount": 100,
-          "note": "testing the new transaction"
-        },
-        {
-          "txid": 1712569227030,
-          "datetime": "2024-04-08T09:40:27.030Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "recipientId": 559098686,
-          "amount": 100,
-          "note": "testing the new transaction"
-        },
-        {
-          "txid": 1712570025644,
-          "datetime": "2024-04-08T09:53:45.644Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "recipientId": 559098686,
-          "amount": 100,
-          "note": "testing the new gsheets integration"
-        },
-        {
-          "txid": 1712570085225,
-          "datetime": "2024-04-08T09:54:45.225Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "recipientId": 559098686,
-          "amount": 111,
-          "note": "to test a new entry if it will go to the next row"
-        },
-        {
-          "txid": 1712570269721,
-          "datetime": "2024-04-08T09:57:49.721Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "recipientId": 559098686,
-          "amount": 2,
-          "note": "to test if sender role is now working (with log)"
-        },
-        {
-          "txid": 1712570702869,
-          "datetime": "2024-04-08T10:05:02.869Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "recipientId": 559098686,
-          "amount": 7,
-          "note": "to see if sender role will now be appended on sheets"
-        },
-        {
-          "txid": 1712570965585,
-          "datetime": "2024-04-08T10:09:25.585Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "recipientId": 559098686,
-          "amount": 7,
-          "note": "check if the data is complete on sheets"
-        },
-        {
-          "txid": 1712571656076,
-          "datetime": "2024-04-08T10:20:56.076Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "recipientId": 559098686,
-          "amount": 100,
-          "note": "testing again coz it's not working"
-        },
-        {
-          "txid": 1712571656078,
-          "datetime": "2024-04-08T10:20:56.078Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "recipientId": 559098686,
-          "amount": 100,
-          "note": "testing again coz it's not working"
-        },
-        {
-          "txid": 1712571764621,
-          "datetime": "2024-04-08T10:22:44.621Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "recipientId": 559098686,
-          "amount": 1,
-          "note": "testing again coz it's not working"
-        },
-        {
-          "txid": 1712573981419,
-          "datetime": "2024-04-08T10:59:41.419Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "senderRole": "senderRole should appear now!",
-          "recipientId": 559098686,
-          "amount": 1
-        },
-        {
-          "txid": 1712573981421,
-          "datetime": "2024-04-08T10:59:41.421Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "senderRole": "senderRole should appear now! as in now!!",
-          "recipientId": 559098686,
-          "amount": 1
-        },
-        {
-          "txid": 1712574006836,
-          "datetime": "2024-04-08T11:00:06.836Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "senderRole": "senderRole should appear now! as in now!!",
-          "recipientId": 559098686,
-          "amount": 1
-        },
-        {
-          "txid": 1712574312606,
-          "datetime": "2024-04-08T11:05:12.606Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "senderRole": "notehere",
-          "recipientId": 559098686,
-          "amount": 1
-        },
-        {
-          "txid": 1712574544734,
-          "datetime": "2024-04-08T11:09:04.734Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "senderRole": "noteherepls",
-          "recipientId": 559098686,
-          "amount": 1
-        },
-        {
-          "txid": 1712574771259,
-          "datetime": "2024-04-08T11:12:51.259Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "senderRole": "",
-          "recipientId": 559098686,
-          "amount": 1
-        },
-        {
-          "txid": 1712577946975,
-          "datetime": "2024-04-08T12:05:46.975Z",
-          "communityId": "559098686",
-          "senderId": 559098686,
-          "senderRole": "notehere",
-          "recipientId": 559098686,
-          "amount": 1
-        }
-      ],
+      "transactions": [],
       "roles": [],
       "settings": {
         "pointsName": "GOOD",
@@ -212,7 +50,8 @@
           "id": 1620878669,
           "username": "Ellen",
           "points": 0,
-          "role": "user"
+          "role": "user",
+          "Status": "Active"
         }
       ],
       "transactions": [],
@@ -226,47 +65,40 @@
           "id": 2008390276,
           "points": 508,
           "role": "admin",
-          "username": "Xblanc25"
-        },
-        {
-          "id": 559098686,
-          "points": 100,
-          "role": "owner",
-          "username": "chiibitsu"
+          "username": "Xblanc25",
+          "Status": "Active"
         },
         {
           "id": 911907262,
           "username": "DocVince",
-          "points": 100,
-          "role": "admin"
+          "points": 110,
+          "role": "admin",
+          "Status": "Active"
         },
         {
           "id": 5103146862,
           "points": 100,
-          "role": "user",
-          "username": "bitlukane"
-        }
-      ],
-      "transactions": [
-        {
-          "txid": 1712575063694,
-          "datetime": "2024-04-08T11:17:43.694Z",
-          "communityId": "-1002006262479",
-          "senderId": 559098686,
-          "senderRole": "testing logging transactions on GSheets",
-          "recipientId": 2008390276,
-          "amount": 1
+          "role": "member",
+          "username": "bitlukane",
+          "Status": "Active"
         },
         {
-          "txid": 1712578000754,
-          "datetime": "2024-04-08T12:06:40.754Z",
-          "communityId": "-1002006262479",
-          "senderId": 559098686,
-          "senderRole": "testing if the transaction works now",
-          "recipientId": 2008390276,
-          "amount": 10
+          "id": 559098686,
+          "points": 90,
+          "role": "owner",
+          "username": "chiibitsu",
+          "Status": "Removed"
+        },
+        {
+          "id": 1063294585,
+          "username": "firestarter88",
+          "points": 50,
+          "role": "owner",
+          "Status": "Active"
+
         }
       ],
+      "transactions": [],
       "roles": [
         {
           "name": "owner",
@@ -304,13 +136,15 @@
           "id": 5103146862,
           "username": "bitlukane",
           "points": 100,
-          "role": "member"
+          "role": "member",
+          "Status": "Active"
         },
         {
           "id": 559098686,
           "username": "chiibitsu",
           "points": 15,
-          "role": "owner"
+          "role": "owner",
+          "Status": "Active"
         }
       ],
       "transactions": [],

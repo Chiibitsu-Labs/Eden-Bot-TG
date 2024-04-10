@@ -1,39 +1,46 @@
 // src/commands/transfer.mjs
 import { adjustUserPoints } from '../utils/userOps.mjs';
-import { isOwnerOrAdmin } from '../utils/roleChecks.mjs';
+import { logTransactionToSheet } from '../utils/googleSheetsClient.mjs';
+import { logTransactionToAirtable } from '../utils/airtableClient.mjs';
 
 export const transferCommand = async (msg, bot, db) => {
-    const chatId = msg.chat.id.toString(); // Community-specific identifier
-    const [, username, pointsStr] = msg.text.match(/\/transfer (@\w+) (\d+)/) || [];
+    const chatId = msg.chat.id.toString();
+    const [, username, pointsStr, note] = msg.text.match(/\/transfer (@\w+) (\d+)\s*(.*)/) || [];
+    const senderId = msg.from.id;
+    const sender = db.data.communities[chatId]?.users.find(user => user.id === senderId);
+    const senderRole = sender ? sender.role : "undefined role";
     const points = parseInt(pointsStr, 10);
-    const pointsName = db.data.communities[chatId].settings.pointsName || "points"; // Fetching the dynamic points name
+    const pointsName = db.data.communities[chatId]?.settings?.pointsName || "points";
 
-    if (!username || isNaN(points)) {
-        return bot.sendMessage(msg.chat.id, `Correct format: /transfer <@username> <# of ${pointsName}>`);
+    if (!username || isNaN(points) || points <= 0) {
+        return bot.sendMessage(msg.chat.id, `Correct format: /transfer <@username> <# of ${pointsName}>, where <# of ${pointsName}> is a positive number.`);
     }
 
-    // Ensure community exists in the db
     if (!db.data.communities[chatId]) {
         return bot.sendMessage(msg.chat.id, "This community has no data.");
     }
 
-    const fromUser = db.data.communities[chatId].users.find(user => user.id === msg.from.id);
-    const toUser = db.data.communities[chatId].users.find(user => user.username === username.replace('@', ''));
+    const fromUser = db.data.communities[chatId]?.users.find(user => user.id === msg.from.id);
+    const toUser = db.data.communities[chatId]?.users.find(user => user.username === username.replace('@', ''));
 
-    if (!fromUser) {
-        return bot.sendMessage(msg.chat.id, "You're not registered in this community.");
-    }
-    if (!toUser) {
-        return bot.sendMessage(msg.chat.id, `User ${username} not found in this community.`);
-    }
-    if (fromUser.points < points) {
-        return bot.sendMessage(msg.chat.id, `You do not have enough ${pointsName}.`);
+    if (!fromUser || !toUser || fromUser.points < points) {
+        return bot.sendMessage(msg.chat.id, `Transfer failed. Please check the users' registration status and balance.`);
     }
 
-    // Adjust points for both users
-    fromUser.points -= points;
-    toUser.points += points;
-    await db.write();
+    try {
+        const transactionFrom = await adjustUserPoints(fromUser.username, -points, db, chatId, senderId, senderRole, note);
+        const transactionTo = await adjustUserPoints(toUser.username, points, db, chatId, senderId, senderRole, note);
 
-    bot.sendMessage(msg.chat.id, `You've successfully transferred ${points} ${pointsName} to ${username}.`);
+        await Promise.all([
+            logTransactionToSheet(transactionFrom),
+            logTransactionToAirtable(transactionFrom),
+            logTransactionToSheet(transactionTo),
+            logTransactionToAirtable(transactionTo)
+        ]);
+
+        bot.sendMessage(msg.chat.id, `You've successfully transferred ${points} ${pointsName} to ${username}.`);
+    } catch (error) {
+        console.error("Failed to process transfer:", error);
+        bot.sendMessage(msg.chat.id, "Failed to log transaction. Please contact support.");
+    }
 };

@@ -35,7 +35,7 @@ export const updateUserRole = async (username, newRole, db, chatId) => {
 };
 
 // Check owner role
-export const isOwner = (userId, db) => {
-  const user = db.data.users.find(user => user.id === userId);
+export const isOwner = (userId, db, chatId) => {
+  const user = db.data.communities[chatId]?.users.find(user => user.id === userId);
   return user && user.role === 'owner';
 };

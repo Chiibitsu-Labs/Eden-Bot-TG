@@ -1,27 +1,45 @@
-// commands/top.mjs
-export const topCommand = (msg, bot, db) => {
+import axios from 'axios';
+
+const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
+const AIRTABLE_API_KEY = process.env.AIRTABLE_PAT;
+const airtableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/Points`;
+
+export const topCommand = async (msg, bot, db) => {
   const chatId = msg.chat.id.toString();
   const chatType = msg.chat.type;
   let communityName = "Community";
 
-  // Check if it's a group or supergroup and use the title, otherwise use the user's first name for private chats
+  const pointsName = db.data.communities[chatId].settings.pointsName || "points"; // Fetching the dynamic points name
+
   if (chatType === 'group' || chatType === 'supergroup') {
-      communityName = msg.chat.title;
+    communityName = msg.chat.title;
   } else if (chatType === 'private') {
-      communityName = msg.from.first_name;
+    communityName = msg.from.first_name;
   }
 
-  if (!db.data.communities[chatId]) {
-      return bot.sendMessage(msg.chat.id, "This community has no leaderboard data.");
-  }
+  // Constructing the Airtable API request
+  const config = {
+    headers: { Authorization: `Bearer ${AIRTABLE_API_KEY}` },
+    params: {
+      filterByFormula: `AND({Community ID} = '${chatId}', {Status} = 'Removed')`,
+      sort: [{field: "Points", direction: "desc"}]
+    },
+  };
 
-  const pointsName = db.data.communities[chatId].pointsName || "Points"; // Fallback to "Points" if not set
+  try {
+    const response = await axios.get(airtableUrl, config);
+    if (response.data.records.length === 0) {
+      return bot.sendMessage(chatId, "This community has no leaderboard data.");
+    }
 
-  const leaderboard = db.data.communities[chatId].users
-      .sort((a, b) => b.points - a.points)
-      .map((user, index) => `${index + 1}. ${user.username || 'Anonymous'}: ${user.points} ${pointsName}`)
+    const leaderboard = response.data.records
+      .map((record, index) => `${index + 1}. ${record.fields.Username || 'Anonymous'}: ${record.fields.Points} Points`)
       .join('\n');
 
-  const leaderboardMessage = `${communityName}'s ${pointsName} Leaderboard\n` + leaderboard;
-  bot.sendMessage(msg.chat.id, leaderboardMessage || "Leaderboard is empty.");
+    const leaderboardMessage = `${communityName}'s ${pointsName} Leaderboard\n` + leaderboard;
+    bot.sendMessage(chatId, leaderboardMessage);
+  } catch (error) {
+    console.error('Error fetching leaderboard from Airtable:', error);
+    bot.sendMessage(chatId, "Failed to fetch the leaderboard.");
+  }
 };
