@@ -21,7 +21,7 @@ export const topCommand = async (msg, bot, db) => {
   const config = {
     headers: { Authorization: `Bearer ${AIRTABLE_API_KEY}` },
     params: {
-      filterByFormula: `AND({Community ID} = '${chatId}', {Status} = 'Removed')`,
+      filterByFormula: `AND({Community ID} = '${chatId}', {Status} = 'Active')`,
       sort: [{field: "Points", direction: "desc"}]
     },
   };
