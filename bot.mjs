@@ -50,21 +50,22 @@ const bot = new TelegramBot(token, { polling: true });
           const welcomeMessage = db.data.communities[chatId]?.welcomeMessage || "Welcome to the community! Type /enroll to join the Community Rewards Program.";
 
           for (const newMember of msg.new_chat_members) {
-              try {
-                  if (!(await checkUserExists(newMember.id))) {
-                      await addUserToAirtable({
-                          id: newMember.id,
-                          username: newMember.username || '',
-                          role: 'user', // Default role when new member joins
-                          chatId,
-                      });
-                      console.log(`Added new member ${newMember.username || newMember.id} to Airtable.`);
-                  } else {
-                      console.log(`Member ${newMember.username || newMember.id} already exists in Airtable.`);
-                  }
-              } catch (error) {
-                  console.error(`Error handling new member ${newMember.username || newMember.id}:`, error);
-              }
+            try {
+                if (!(await checkUserExists(newMember.id, chatId))) { // Pass chatId as communityId
+                    console.log("Attempting to add user to Airtable with ID:", targetUserId);
+                    await addUserToAirtable({
+                        id: newMember.id,
+                        username: newMember.username || '',
+                        role: 'user', // Default role when new member joins
+                        chatId, 
+                    }, chatId); // Pass chatId as communityId
+                    console.log(`Added new member ${newMember.username || newMember.id} to Airtable.`);
+                } else {
+                    console.log(`Member ${newMember.username || newMember.id} already exists in Airtable.`);
+                }
+            } catch (error) {
+                console.error(`Error handling new member ${newMember.username || newMember.id}:`, error);
+            }
           }
 
           bot.sendMessage(chatId, welcomeMessage);

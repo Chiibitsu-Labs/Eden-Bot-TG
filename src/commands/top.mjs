@@ -9,7 +9,12 @@ export const topCommand = async (msg, bot, db) => {
   const chatType = msg.chat.type;
   let communityName = "Community";
 
-  const pointsName = db.data.communities[chatId].settings.pointsName || "points"; // Fetching the dynamic points name
+  // Check if the community data exists
+  if (!db.data.communities[chatId]) {
+    return bot.sendMessage(chatId, "This community has no data or settings configured.");
+  }
+
+  const pointsName = db.data.communities[chatId].settings.pointsName || "points"; // Fetching the dynamic points name, ensure it exists
 
   if (chatType === 'group' || chatType === 'supergroup') {
     communityName = msg.chat.title;
@@ -33,7 +38,7 @@ export const topCommand = async (msg, bot, db) => {
     }
 
     const leaderboard = response.data.records
-      .map((record, index) => `${index + 1}. ${record.fields.Username || 'Anonymous'}: ${record.fields.Points} Points`)
+      .map((record, index) => `${index + 1}. ${record.fields.Username || 'Anonymous'}: ${record.fields.Points} ${pointsName}`)
       .join('\n');
 
     const leaderboardMessage = `${communityName}'s ${pointsName} Leaderboard\n` + leaderboard;

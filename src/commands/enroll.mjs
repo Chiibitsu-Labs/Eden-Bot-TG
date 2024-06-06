@@ -1,5 +1,6 @@
 // src/commands/enroll.mjs
 import { isOwnerOrAdmin, getRoleLevel, updateUserRole } from '../utils/roleChecks.mjs';
+import { addUserToAirtable } from '../utils/airtableHelpers.mjs';
 
 export const enrollCommand = async (msg, bot, db) => {
     const chatId = msg.chat.id.toString();
@@ -40,6 +41,9 @@ export const enrollCommand = async (msg, bot, db) => {
     if (!targetUser) {
         community.users.push({ id: targetUserId, username: targetUsername, points: 0, role: specifiedRole });
         await db.write();
+        console.log("Attempting to add user to Airtable with ID:", targetUserId);
+        await addUserToAirtable({ id: targetUserId, username: targetUsername }, chatId);  // Make sure to call this function
+        console.log("User addition to Airtable attempted.");
         bot.sendMessage(msg.chat.id, `@${targetUsername} has been enrolled as ${specifiedRole}.`);
         return;
     }

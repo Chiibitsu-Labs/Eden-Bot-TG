@@ -3,18 +3,19 @@ import axios from 'axios';
 
 // Assuming these environment variables are set in your environment
 const airtableBaseUrl = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}`;
-const airtableApiKey = `Bearer ${process.env.AIRTABLE_PAT}`;
+const airtableApiKey = `${process.env.AIRTABLE_PAT}`;
 
-export async function checkUserExists(userId) {
+export async function checkUserExists(userId, communityId) {
   const config = {
     headers: { Authorization: airtableApiKey },
     params: {
-      filterByFormula: `AND({User ID} = '${userId}', {Community ID} = '${communityId}')`,
+      filterByFormula: `AND({User ID} = '${userId}', {Community} = '${communityId}')`,
     },
   };
 
   try {
-    const response = await axios.get(`${airtableBaseUrl}/Users`, config);
+    const response = await axios.get(`${airtableBaseUrl}/Points`, config);
+    console.log(response.data.records); // This will log the filtered records to the console.
     return response.data.records.length > 0;
   } catch (error) {
     console.error('Error checking user in Airtable:', error);
@@ -22,29 +23,33 @@ export async function checkUserExists(userId) {
   }
 }
 
-export async function addUserToAirtable(user) {
+
+export async function addUserToAirtable(user, communityId) {
   const config = {
-    headers: {
-      Authorization: airtableApiKey,
-      'Content-Type': 'application/json',
-    },
+      headers: {
+          Authorization: `Bearer ${airtableApiKey}`,
+          'Content-Type': 'application/json',
+      },
   };
 
   const userData = {
-    fields: {
-      UserID: user.id.toString(),
-      Username: user.username || 'No username',
-      Role: 'user',
-    },
+      fields: {
+          "User ID": user.id.toString(),
+          Username: user.username || 'No username',
+          "Community ID": communityId,
+          Role: 'user',
+      },
   };
 
   try {
-    const response = await axios.post(`${airtableBaseUrl}/Users`, userData, config);
-    console.log('User added to Airtable:', response.data);
+      const response = await axios.post(`${airtableBaseUrl}/Users`, userData, config);  // Ensure correct table name
+      console.log('User added to Airtable:', response.data);
   } catch (error) {
-    console.error('Error adding user to Airtable:', error);
+      console.error('Error adding user to Airtable:', error);
+      console.error('Response:', error.response.data);  // More detailed error info
   }
 }
+
 
 // Assuming you have a function to find the user by ID and update the status
 export async function updateUserStatusInAirtable(userId, communityId, newStatus) {

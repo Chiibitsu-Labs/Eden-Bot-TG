@@ -63,7 +63,7 @@
       "users": [
         {
           "id": 2008390276,
-          "points": 508,
+          "points": 608,
           "role": "admin",
           "username": "Xblanc25",
           "Status": "Active"
@@ -83,22 +83,25 @@
           "Status": "Active"
         },
         {
-          "id": 559098686,
-          "points": 90,
-          "role": "owner",
-          "username": "chiibitsu",
-          "Status": "Removed"
-        },
-        {
           "id": 1063294585,
           "username": "firestarter88",
           "points": 50,
           "role": "owner",
           "Status": "Active"
-
         }
       ],
-      "transactions": [],
+      "transactions": [
+        {
+          "txid": "1712807786215",
+          "datetime": "2024-04-11T03:56:26Z",
+          "communityId": "-1002006262479",
+          "senderId": "2008390276",
+          "senderRole": "admin",
+          "recipientId": "2008390276",
+          "amount": 100,
+          "note": ""
+        }
+      ],
       "roles": [
         {
           "name": "owner",
@@ -145,6 +148,30 @@
           "points": 15,
           "role": "owner",
           "Status": "Active"
+        },
+        {
+          "id": 1724580555,
+          "username": "DavidLee369",
+          "points": 0,
+          "role": "member"
+        },
+        {
+          "id": 6095811406,
+          "username": "GabGonz14",
+          "points": 0,
+          "role": "member"
+        },
+        {
+          "id": 2008390276,
+          "username": "Xblanc25",
+          "points": 0,
+          "role": "member"
+        },
+        {
+          "id": 1074528408,
+          "username": "applesepin",
+          "points": 0,
+          "role": "member"
         }
       ],
       "transactions": [],
@@ -153,6 +180,93 @@
         "pointsName": "ORO"
       },
       "pointsName": "ORO"
+    },
+    "6995500883": {
+      "users": [
+        {
+          "id": 6995500883,
+          "username": "Big",
+          "points": 0,
+          "role": "user"
+        }
+      ],
+      "transactions": [],
+      "roles": [],
+      "settings": {},
+      "pointsName": "GOOD"
+    },
+    "6669232503": {
+      "users": [
+        {
+          "id": 6669232503,
+          "username": "Shad",
+          "points": 0,
+          "role": "user"
+        }
+      ],
+      "transactions": [],
+      "roles": [],
+      "settings": {},
+      "pointsName": "GOOD"
+    },
+    "-1001783009081": {
+      "users": [
+        {
+          "id": 559098686,
+          "username": "chiibitsu",
+          "points": 0,
+          "role": "member"
+        }
+      ],
+      "transactions": [
+        {
+          "txid": "1717666080052",
+          "datetime": "2024-06-06T09:28:00Z",
+          "communityId": "-1001783009081",
+          "senderId": "559098686",
+          "senderRole": "owner",
+          "recipientId": "559098686",
+          "amount": 1,
+          "note": ""
+        },
+        {
+          "txid": "1717679017339",
+          "datetime": "2024-06-06T13:03:37Z",
+          "communityId": "-1001783009081",
+          "senderId": "559098686",
+          "senderRole": "owner",
+          "recipientId": "559098686",
+          "amount": 1,
+          "note": ""
+        }
+      ],
+      "roles": [
+        {
+          "name": "owner",
+          "level": 10
+        },
+        {
+          "name": "admin",
+          "level": 5
+        },
+        {
+          "name": "leader",
+          "level": 4
+        },
+        {
+          "name": "advocate",
+          "level": 3
+        },
+        {
+          "name": "member",
+          "level": 2
+        },
+        {
+          "name": "user",
+          "level": 1
+        }
+      ],
+      "settings": {}
     }
   }
 }
